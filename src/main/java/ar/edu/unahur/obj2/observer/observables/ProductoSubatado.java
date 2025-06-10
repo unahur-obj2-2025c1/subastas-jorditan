@@ -1,27 +1,37 @@
 package ar.edu.unahur.obj2.observer.observables;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import ar.edu.unahur.obj2.observer.Oferta;
+import ar.edu.unahur.obj2.observer.excepciones.OfertaSubastadorException;
 import ar.edu.unahur.obj2.observer.observadores.Observer;
 
 public class ProductoSubatado implements Observable{
-  private String nombre;
-    private List<Oferta> ofertas = Arrays.asList();
+    private String nombre;
+    List<Oferta> ofertas = new ArrayList<>();
     private Set<Observer> observadores = new HashSet<>();
 
     public ProductoSubatado(String nombre) {
       this.nombre = nombre;
     }
 
-    public void agregarOferta(Oferta oferta) {
-      // Validación de oferta si el ofertador es un observador
-      ofertas.add(oferta);
-      this.notificar();
+
+    public List<Oferta> getOfertas () {
+      return this.ofertas;
     }
+
+    public void agregarOferta(Oferta oferta) {
+      if (observadores.contains(oferta.getSubastador())) {
+        ofertas.add(oferta);
+        this.notificar();
+      } else {
+        throw new OfertaSubastadorException("El subastador no participa en la subasta");
+      }
+    }
+
 
     public Oferta obtenerUltimaOferta() {
       Integer ultimoIndice = ofertas.size() - 1;
@@ -45,5 +55,10 @@ public class ProductoSubatado implements Observable{
 
     public String getNombre() {
       return this.nombre;
+    }
+
+    public void reset() {
+      ofertas.clear();
+      observadores.clear();
     }
 }
