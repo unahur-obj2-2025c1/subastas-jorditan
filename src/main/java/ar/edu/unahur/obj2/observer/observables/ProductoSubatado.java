@@ -8,6 +8,7 @@ import java.util.Set;
 import ar.edu.unahur.obj2.observer.Oferta;
 import ar.edu.unahur.obj2.observer.excepciones.OfertaSubastadorException;
 import ar.edu.unahur.obj2.observer.observadores.Observer;
+import ar.edu.unahur.obj2.observer.observadores.Subastador;
 
 public class ProductoSubatado implements Observable{
     private String nombre;
@@ -17,7 +18,6 @@ public class ProductoSubatado implements Observable{
     public ProductoSubatado(String nombre) {
       this.nombre = nombre;
     }
-
 
     public List<Oferta> getOfertas () {
       return this.ofertas;
@@ -32,6 +32,9 @@ public class ProductoSubatado implements Observable{
       }
     }
 
+    public Boolean saberSiSubastadorOferto(Subastador subastador) {
+    return ofertas.stream().anyMatch(o -> o.getSubastador() == subastador);
+  }
 
     public Oferta obtenerUltimaOferta() {
       Integer ultimoIndice = ofertas.size() - 1;

@@ -4,15 +4,14 @@ import ar.edu.unahur.obj2.observer.Oferta;
 import ar.edu.unahur.obj2.observer.observables.ProductoSubatado;
 import ar.edu.unahur.obj2.observer.observadores.Subastador;
 
-public class SubastadorArriesgado implements StrategySubastador {
+public class SubastadorUnico implements StrategySubastador {
 
   @Override
   public void ofertar(ProductoSubatado productoSubastado, Subastador subastador) {
-    productoSubastado.agregarOferta(
-      new Oferta
-      (this.montoEsperado(productoSubastado), subastador
-      )
-    );
+    if (!productoSubastado.saberSiSubastadorOferto(subastador)) {
+      productoSubastado.agregarOferta(
+      new Oferta (this.montoEsperado(productoSubastado), subastador));
+    }
   }
 
   @Override
@@ -22,5 +21,5 @@ public class SubastadorArriesgado implements StrategySubastador {
     }
     return productoSubatado.obtenerUltimaOferta().getMonto() + 10;
   }
-  
+
 }

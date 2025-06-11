@@ -36,20 +36,6 @@ public class Subastador implements Observer {
   }
 
 
-  // public void ofertar(ProductoSubatado producto) {
-  //   Integer ofertaEsperada;
-  //   if (this.ultimaOferta == null) {
-  //     ofertaEsperada = 10;
-  //   } else {
-  //     ofertaEsperada = this.ultimaOferta.getMonto() + 10;
-  //   }
-  //   producto.agregarOferta(
-  //     new Oferta
-  //     (ofertaEsperada, this
-  //     )
-  //   );
-  // }
-
   public void ofertar(ProductoSubatado productoSubatado) {
     strategy.ofertar(productoSubatado, this);
   }
