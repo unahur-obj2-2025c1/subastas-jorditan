@@ -9,12 +9,13 @@ import org.junit.jupiter.api.Test;
 import ar.edu.unahur.obj2.observer.Oferta;
 import ar.edu.unahur.obj2.observer.excepciones.OfertaSubastadorException;
 import ar.edu.unahur.obj2.observer.observadores.Subastador;
+import ar.edu.unahur.obj2.observer.strategys.SubastadorArriesgado;
 
 class ProductoSubatadoTest {
   ProductoSubatado productoSubastado = new ProductoSubatado("Auto BMW");
-  Subastador subastador1 = new Subastador("gonzager");
-  Subastador subastador2 = new Subastador("martomau");
-  Subastador subastador3 = new Subastador("diazdan");
+  Subastador subastador1 = new Subastador("gonzager", new SubastadorArriesgado());
+  Subastador subastador2 = new Subastador("martomau", new SubastadorArriesgado());
+  Subastador subastador3 = new Subastador("diazdan", new SubastadorArriesgado());
 
   @BeforeEach
   void setupEscenario1() {
