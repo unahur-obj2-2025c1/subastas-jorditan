@@ -40,12 +40,6 @@ class ProductoSubatadoTest {
     subastador5.ofertar(productoSubastado);
   }
 
-  // @Test
-  // void gonzaegerSabeQueLaUltimaOfertaLaHizoMartumau() {
-  //   assertEquals(subastador1.getUltimaOferta().getSubastador().getNombre(), "martomau");
-  //   assertEquals(subastador2.getUltimaOferta().getSubastador().getNombre(), "martomau");
-  // }
-
   @Test 
   void laUltimaOfertaEsDe30Unidades() {
     assertEquals(30, productoSubastado.obtenerUltimaOferta().getMonto());
