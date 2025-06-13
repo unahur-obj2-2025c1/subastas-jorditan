@@ -26,24 +26,22 @@ public class Subastador implements Observer {
     ultimaOferta = null;
   }
 
-
   public String getNombre() {
     return this.nombre;
   }
   
   public Integer ofertaEsperada() {
-    return this.ultimaOferta.getMonto() + 10;
+  return (ultimaOferta != null) ? ultimaOferta.getMonto() + 10 : 10;
   }
-
 
   public void ofertar(ProductoSubatado productoSubatado) {
     strategy.ofertar(productoSubatado, this);
   }
 
   @Override
-  public void actualizar(ProductoSubatado productoSubatado) {
-    System.out.println("Se ha realizado una oferta sobre el producto " + productoSubatado.getNombre() + "de " + productoSubatado.obtenerUltimaOferta() + "pesos");
-    this.ultimaOferta = productoSubatado.obtenerUltimaOferta();
+  public void actualizar(ProductoSubatado producto) {
+  this.ultimaOferta = producto.obtenerUltimaOferta(); 
+  System.out.println("[" + nombre + "] recibio nueva oferta en " + producto.getNombre() + ": " + producto.obtenerUltimaOferta().getMonto());
   }
 
   public Oferta getUltimaOferta() {
